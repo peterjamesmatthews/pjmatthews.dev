@@ -1,29 +1,17 @@
 {
-  "version": "0.2.0",
   "configurations": [
     {
-      "name": "backend",
-      "type": "node-terminal",
-      "request": "launch",
-      "command": "npm run dev"
-    },
-    {
-      "name": "frontend",
-      "type": "pwa-chrome",
-      "request": "launch",
-      "url": "http://localhost:3000"
-    },
-    {
-      "name": "full stack",
-      "type": "node-terminal",
-      "request": "launch",
+      "name": "App",
+      "cwd": "${workspaceFolder}/app",
       "command": "npm run dev",
-      "console": "integratedTerminal",
+      "request": "launch",
       "serverReadyAction": {
+        "action": "debugWithChrome",
         "pattern": "started server on .+, url: (https?://.+)",
-        "uriFormat": "%s",
-        "action": "debugWithChrome"
-      }
+        "uriFormat": "%s"
+      },
+      "type": "node-terminal"
     }
-  ]
+  ],
+  "version": "0.2.0"
 }

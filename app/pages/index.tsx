@@ -1,17 +1,11 @@
 import type { NextPage } from "next";
-import Head from "next/head";
 import Link from "next/link";
-import styles from "../styles/Home.module.scss";
+
+import styles from "../styles/util.module.scss";
 
 const Home: NextPage = () => {
   return (
     <div className={styles.container}>
-      <Head>
-        <title>pjmatthews.dev</title>
-        <meta name="description" content="pjmatthews.dev" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <main className={styles.main}>
         <h1 className={styles.title}>Peter Matthews</h1>
 
@@ -26,7 +20,7 @@ const Home: NextPage = () => {
           </Link>
 
           <Link href="/prj">
-            <a href="/prj" className={styles.card}>
+            <a className={styles.card}>
               <h2>Projects &rarr;</h2>
               <p>Check out some of the projects I&apos;ve created.</p>
             </a>

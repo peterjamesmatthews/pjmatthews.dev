@@ -1,0 +1,54 @@
+// See https://go.microsoft.com/fwlink/?LinkId=733558
+// for the documentation about the tasks.json format
+{
+  "tasks": [
+    {
+      "args": [
+        "-rf",
+        "${workspaceFolder}/app/node_modules",
+        "${workspaceFolder}/app/dist"
+      ],
+      "command": "rm",
+      "detail": "Removes files generated during build process.",
+      "label": "Clean",
+      "problemMatcher": [],
+      "type": "shell"
+    },
+    {
+      "detail": "Install all npm dependencies.",
+      "group": "none",
+      "label": "Install",
+      "options": {
+        "cwd": "${workspaceFolder}/app"
+      },
+      "problemMatcher": [],
+      "script": "install",
+      "type": "npm"
+    },
+    {
+      "args": ["turbo", "run", "build"],
+      "command": "npx",
+      "dependsOn": "Install",
+      "detail": "Builds the application for a production environment.",
+      "label": "Build",
+      "options": {
+        "cwd": "${workspaceFolder}/app"
+      },
+      "problemMatcher": [],
+      "type": "shell"
+    },
+    {
+      "dependsOn": "Build",
+      "dependsOrder": "sequence",
+      "detail": "Starts the application.",
+      "label": "Start",
+      "options": {
+        "cwd": "${workspaceFolder}/app"
+      },
+      "problemMatcher": [],
+      "script": "start",
+      "type": "npm"
+    }
+  ],
+  "version": "2.0.0"
+}

@@ -2,7 +2,8 @@ import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Link from "next/link";
 
 import { getProjectIds, getProjectProps } from "../../db/projects";
-import styles from "../../styles/Project.module.scss";
+import utilStyles from "../../styles/util.module.scss";
+import prjStyles from "../../styles/Project.module.scss";
 
 type ProjectProps = {
   author: string;
@@ -37,19 +38,22 @@ export const getStaticPaths: GetStaticPaths = async () => {
 const Project: NextPage<ProjectProps> = (props) => {
   const { title, date, author, content } = props;
   return (
-    <div className={styles.project}>
-      <div className={styles.header}>
-        <h1>{title}</h1>
-        <h6>
+    <div>
+      <main className={`${utilStyles.main} ${prjStyles.project}`}>
+        <h1 className={prjStyles.title}>{title}</h1>
+        <h2 className={prjStyles.subtitle}>
           {date} {author}
-        </h6>
-      </div>
-      <div dangerouslySetInnerHTML={{ __html: content }} />
-      <div className={styles.footer}>
+        </h2>
+        <div
+          className={prjStyles.content}
+          dangerouslySetInnerHTML={{ __html: content }}
+        />
+      </main>
+      <footer className={utilStyles.footer}>
         <Link href="/">
           <a>pjmatthews.dev</a>
         </Link>
-      </div>
+      </footer>
     </div>
   );
 };

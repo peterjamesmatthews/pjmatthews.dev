@@ -11,7 +11,8 @@ const projectDir = path.join(process.cwd(), "db", "projects");
  * @returns array of strings w/project ids
  */
 export function getProjectIds() {
-  const projects = fs.readdirSync(projectDir);
+  let projects = fs.readdirSync(projectDir);
+  projects = projects.filter((project) => project.indexOf(".md") > 0);
   return projects.map((project) => project.replace(/\.md$/, ""));
 }
 
@@ -41,4 +42,23 @@ export async function getProjectProps(id: string) {
       title: string;
     }),
   };
+}
+
+/**
+ * statically generate props for Projects
+ * @returns array of project ids, titles, authors, and dates
+ */
+export async function getProjectsProps() {
+  const ids = getProjectIds();
+  const props = { projects: new Array() };
+  for (let i = 0; i < ids.length; i++) {
+    const project = await getProjectProps(ids[i]);
+    props.projects.push({
+      id: ids[i],
+      title: project.title,
+      author: project.author,
+      date: project.date,
+    });
+  }
+  return props;
 }
