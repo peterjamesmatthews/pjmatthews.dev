@@ -3,7 +3,8 @@ import Link from "next/link";
 import Head from "next/head";
 
 import { getProjectsProps } from "../../db/projects";
-import styles from "../../styles/util.module.scss";
+import styles from "../../styles/Projects.module.scss";
+import Footer from "../../components/Footer";
 
 type ProjectsProps = {
   projects: {
@@ -29,7 +30,7 @@ const Projects: NextPage<ProjectsProps> = (props) => {
       <main className={styles.main}>
         <h1 className={styles.title}>Projects</h1>
 
-        <div className={styles.grid}>
+        <section className={styles.grid}>
           {projects.map(({ id, title, author, date }) => {
             return (
               <Link href={`/prj/${id}`} key={id}>
@@ -42,13 +43,9 @@ const Projects: NextPage<ProjectsProps> = (props) => {
               </Link>
             );
           })}
-        </div>
+        </section>
       </main>
-      <footer className={styles.footer}>
-        <Link href="/">
-          <a>pjmatthews.dev</a>
-        </Link>
-      </footer>
+      <Footer />
     </div>
   );
 };
