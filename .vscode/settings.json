@@ -1,9 +1,0 @@
-{
-  "editor.defaultFormatter": "esbenp.prettier-vscode", // prettier default formatter
-  "editor.formatOnSave": true, // format on save
-  "[jsonc]": {
-    // dev config files
-    "editor.rulers": [], // don't draw vertical ruler
-    "editor.wordWrap": "off" // don't wrap long lines
-  }
-}

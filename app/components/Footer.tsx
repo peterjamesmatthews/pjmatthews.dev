@@ -2,11 +2,9 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer>
-      <Link href="/">
-        <a>pjmatthews.dev</a>
-      </Link>
-    </footer>
+    <Link href="/">
+      <a>pjmatthews.dev</a>
+    </Link>
   );
 };
 

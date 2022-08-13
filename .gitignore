@@ -9,8 +9,5 @@ app/.next
 # production
 app/dist
 
-# turbo
-app/.turbo
-
 # misc
 .DS_Store

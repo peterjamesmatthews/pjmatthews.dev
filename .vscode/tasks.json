@@ -9,14 +9,13 @@
         "${workspaceFolder}/app/dist"
       ],
       "command": "rm",
-      "detail": "Removes files generated during build process.",
+      "detail": "Remove files generated during Build and Install tasks.",
       "label": "Clean",
       "problemMatcher": [],
       "type": "shell"
     },
     {
-      "detail": "Install all npm dependencies.",
-      "group": "none",
+      "detail": "Installs all npm dependencies.",
       "label": "Install",
       "options": {
         "cwd": "${workspaceFolder}/app"
@@ -26,28 +25,35 @@
       "type": "npm"
     },
     {
-      "args": ["turbo", "run", "build"],
-      "command": "npx",
-      "dependsOn": "Install",
-      "detail": "Builds the application for a production environment.",
+      "detail": "Builds the application for deployment.",
       "label": "Build",
       "options": {
         "cwd": "${workspaceFolder}/app"
       },
       "problemMatcher": [],
-      "type": "shell"
+      "script": "build",
+      "type": "npm"
     },
     {
       "dependsOn": "Build",
       "dependsOrder": "sequence",
-      "detail": "Starts the application.",
-      "label": "Start",
+      "detail": "Builds and starts the application.",
+      "label": "Deploy",
       "options": {
         "cwd": "${workspaceFolder}/app"
       },
       "problemMatcher": [],
       "script": "start",
       "type": "npm"
+    },
+    {
+      "type": "npm",
+      "script": "test",
+      "path": "app",
+      "group": "test",
+      "problemMatcher": [],
+      "label": "Test",
+      "detail": "Opens cypress"
     }
   ],
   "version": "2.0.0"

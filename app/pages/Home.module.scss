@@ -1,15 +1,6 @@
-.main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 90vh;
-}
-
-.title {
-  margin: 4rem auto;
-  overflow-x: hidden;
-  font-size: max(4rem, 100%);
-  line-height: 1.5;
+.welcome {
+  margin: 0 auto;
+  font-size: max(1.5rem, 100%);
   white-space: nowrap;
 }
 
@@ -50,4 +41,11 @@
   margin: 0;
   font-size: 1.25rem;
   line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+  .grid {
+    flex-direction: column;
+    width: 100%;
+  }
 }
