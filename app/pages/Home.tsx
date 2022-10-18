@@ -13,9 +13,7 @@ const Home: NextPage = () => {
       </Head>
       <main>
         <h1>Peter Matthews</h1>
-
         <p className={styles.welcome}>Welcome to my website! 👋</p>
-
         <section className={styles.grid}>
           <Link href="/abt">
             <a className={styles.card}>
