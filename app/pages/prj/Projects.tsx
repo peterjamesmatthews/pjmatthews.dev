@@ -18,7 +18,6 @@ const Projects: NextPage = () => {
       </Head>
       <main>
         <h1>Projects</h1>
-
         <section className={styles.grid}>
           {PROJECTS.map(({ description, id, title }: Project) => {
             return (
