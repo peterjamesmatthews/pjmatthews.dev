@@ -9,6 +9,7 @@ jobs:
       # Install NPM dependencies, cache them correctly
       # and run all Cypress tests
       - name: Cypress
+        working-directory: ./app
         uses: cypress-io/github-action@v4.2.0 # use the explicit version number
         with:
           build: npm run build
