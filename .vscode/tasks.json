@@ -1,60 +1,36 @@
-// See https://go.microsoft.com/fwlink/?LinkId=733558
-// for the documentation about the tasks.json format
 {
+  "version": "2.0.0",
   "tasks": [
-    {
-      "args": [
-        "-rf",
-        "${workspaceFolder}/app/node_modules",
-        "${workspaceFolder}/app/dist"
-      ],
-      "command": "rm",
-      "detail": "Remove files generated during Build and Install tasks.",
-      "label": "Clean",
-      "problemMatcher": [],
-      "type": "shell"
-    },
-    {
-      "detail": "Installs all npm dependencies.",
-      "label": "Install",
-      "options": {
-        "cwd": "${workspaceFolder}/app"
-      },
-      "problemMatcher": [],
-      "script": "install",
-      "type": "npm"
-    },
-    {
-      "detail": "Builds the application for deployment.",
-      "label": "Build",
-      "options": {
-        "cwd": "${workspaceFolder}/app"
-      },
-      "problemMatcher": [],
-      "script": "build",
-      "type": "npm"
-    },
-    {
-      "dependsOn": "Build",
-      "dependsOrder": "sequence",
-      "detail": "Builds and starts the application.",
-      "label": "Deploy",
-      "options": {
-        "cwd": "${workspaceFolder}/app"
-      },
-      "problemMatcher": [],
-      "script": "start",
-      "type": "npm"
-    },
-    {
-      "type": "npm",
-      "script": "test",
-      "path": "app",
-      "group": "test",
-      "problemMatcher": [],
-      "label": "Test",
-      "detail": "Opens cypress"
-    }
-  ],
-  "version": "2.0.0"
+		{
+			"type": "shell",
+			"command": "pnpm i",
+			"label": "Install Web Application Dependencies",
+			"options": {
+				"cwd": "${workspaceFolder}/web-app"
+			}
+		},
+		{
+			"type": "shell",
+			"command": "pnpm astro dev",
+			"label": "Launch Web Application Development Server",
+			"options": {
+				"cwd": "${workspaceFolder}/web-app"
+			},
+			"isBackground": true,
+			"problemMatcher": {
+				"pattern": [
+					{
+						"regexp": ".",
+						"file": 1,
+						"location": 2,
+						"message": 3
+					}
+				],
+				"background": {
+					"beginsPattern": "started in",
+					"endsPattern": "."
+				}
+			}
+		},
+	]
 }
