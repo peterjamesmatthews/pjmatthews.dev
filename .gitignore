@@ -6,6 +6,8 @@ node_modules
 
 # build artifacts
 dist
+pkg
+target
 
 # caches
 .rsw

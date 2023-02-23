@@ -30,5 +30,3 @@ button.addEventListener("click", () => {
       button.textContent = "Count";
     });
 });
-
-export {}; // makes TS play nice with a non-module script
