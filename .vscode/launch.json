@@ -1,13 +1,13 @@
 {
-	"version": "0.2.0",
-	"configurations": [
-		{
-			"type": "chrome",
-			"request": "launch",
-			"name": "Launch Web Application",
-			"url": "http://localhost:3000",
-			"webRoot": "${workspaceFolder}/web-app",
-			"preLaunchTask": "Develop Web Application",
-		}
-	]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Launch Web Application",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}/web-app",
+      "runtimeArgs": ["--disable-gpu-vsync", "--disable-frame-rate-limit"]
+    }
+  ]
 }

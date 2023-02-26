@@ -15,6 +15,7 @@
   "dependencies": {
     "@astrojs/node": "^5.0.3",
     "@rsw/counter": "link:/Users/pjm/Repositories/pjmatthews.dev/web-app/@rsw/counter/pkg",
+    "@rsw/gol": "link:/Users/pjm/Repositories/pjmatthews.dev/web-app/@rsw/gol/pkg",
     "astro": "^2.0.13"
   },
   "devDependencies": {

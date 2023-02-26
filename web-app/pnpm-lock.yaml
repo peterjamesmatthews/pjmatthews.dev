@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@astrojs/node': ^5.0.3
   '@rsw/counter': link:/Users/pjm/Repositories/pjmatthews.dev/web-app/@rsw/counter/pkg
+  '@rsw/gol': link:/Users/pjm/Repositories/pjmatthews.dev/web-app/@rsw/gol/pkg
   '@typescript-eslint/eslint-plugin': ^5.52.0
   '@typescript-eslint/parser': ^5.52.0
   astro: ^2.0.13
@@ -16,6 +17,7 @@ specifiers:
 dependencies:
   '@astrojs/node': 5.0.3_astro@2.0.13
   '@rsw/counter': link:@rsw/counter/pkg
+  '@rsw/gol': link:@rsw/gol/pkg
   astro: 2.0.13
 
 devDependencies:

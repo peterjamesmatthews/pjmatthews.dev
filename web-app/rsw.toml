@@ -32,3 +32,7 @@ dir = "my-template"
 [[crates]]
 name = "@rsw/counter"
 link = true
+
+[[crates]]
+name = "@rsw/gol"
+link = true
