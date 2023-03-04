@@ -1,13 +1,13 @@
 import init from "@rsw/gol";
-import JSUniverse from "./gol/JSUniverse";
-import WASMUniverse from "./gol/WASMUniverse";
+import JSUniverse from "./JSUniverse";
+import WASMUniverse from "./WASMUniverse";
 
 init().then(async ({ memory }) => {
   const js = new JSUniverse(
     <HTMLCanvasElement>document.getElementById("gol-js"),
     64,
     64,
-    "fps-js"
+    <HTMLDivElement>document.getElementById("fps-js")
   );
 
   const wasm = new WASMUniverse(
@@ -15,7 +15,7 @@ init().then(async ({ memory }) => {
     64,
     64,
     memory,
-    "fps-wasm"
+    <HTMLDivElement>document.getElementById("fps-wasm")
   );
 
   const button = <HTMLButtonElement>document.getElementById("play-pause");

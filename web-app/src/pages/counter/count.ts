@@ -1,12 +1,10 @@
+import { APIContext } from "astro";
+
 /**
  * Handle a GET request.
  * @returns {Promise<Response>} - A response containing the incremented count, or an error response.
  */
-export async function get({
-  url,
-}: {
-  url: { search: string };
-}): Promise<Response> {
+export async function get({ url }: APIContext): Promise<Response> {
   // Wait for 1.5 seconds to simulate server delay.
   await new Promise((res) => setTimeout(res, 1500));
 

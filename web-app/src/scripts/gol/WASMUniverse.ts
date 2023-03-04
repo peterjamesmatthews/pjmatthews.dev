@@ -1,5 +1,6 @@
 import { Universe } from "@rsw/gol";
 import FPS from "../FPS";
+import UniverseInterface from "./Universe";
 
 const CELL_SIZE = 5; // px
 const GRID_COLOR = "#CCC";
@@ -11,23 +12,30 @@ const CELL = {
   DEAD: 0,
 } as const;
 
-export default class WASMUniverse {
+export default class WASMUniverse implements UniverseInterface {
   private canvas: HTMLCanvasElement;
   private cells: Uint8Array;
   private context: CanvasRenderingContext2D;
   private height: number;
   private width: number;
   private universe: Universe;
-  private animationId: number;
+  private requestId: number;
   private memory: WebAssembly.Memory;
   private fps?: FPS;
 
+  /**
+   * @param canvas The HTML `canvas` element for this universe to draw on.
+   * @param height The number of cells high this universe will contain (1 cell = 5px square).
+   * @param width The number of cells wide this universe will contain (1 cell = 5px square).
+   * @param memory The memory buffer returned from the WebAssembly module's initialization.
+   * @param fpsDiv _(optional)_ The HTML `div` element for this universe to render its frame-per-second to.
+   */
   constructor(
     canvas: HTMLCanvasElement,
     height: number,
     width: number,
     memory: WebAssembly.Memory,
-    fpsId?: string
+    fpsDiv?: HTMLDivElement
   ) {
     this.canvas = canvas;
     this.canvas.height = (CELL_SIZE + 1) * height + 1;
@@ -35,7 +43,7 @@ export default class WASMUniverse {
     this.height = height;
     this.width = width;
     this.context = canvas.getContext("2d");
-    this.fps = fpsId === undefined ? null : new FPS(fpsId);
+    this.fps = fpsDiv === undefined ? null : new FPS(fpsDiv);
     this.universe = Universe.new(height, width);
     this.memory = memory;
     this.cells = new Uint8Array(
@@ -95,11 +103,11 @@ export default class WASMUniverse {
     this.universe.tick();
     this.drawGrid();
     this.drawCells();
-    this.animationId = requestAnimationFrame(() => this.play());
+    this.requestId = requestAnimationFrame(() => this.play());
   }
 
   public pause() {
-    cancelAnimationFrame(this.animationId);
-    this.animationId = null;
+    cancelAnimationFrame(this.requestId);
+    this.requestId = null;
   }
 }

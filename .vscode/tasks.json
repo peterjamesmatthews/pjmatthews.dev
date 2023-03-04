@@ -1,36 +1,44 @@
 {
-  "version": "2.0.0",
   "tasks": [
-		{
-			"type": "shell",
-			"command": "pnpm i",
-			"label": "Install Web Application Dependencies",
-			"options": {
-				"cwd": "${workspaceFolder}/web-app"
-			}
-		},
-		{
-			"type": "shell",
-			"command": "pnpm astro dev",
-			"label": "Launch Web Application Development Server",
-			"options": {
-				"cwd": "${workspaceFolder}/web-app"
-			},
-			"isBackground": true,
-			"problemMatcher": {
-				"pattern": [
-					{
-						"regexp": ".",
-						"file": 1,
-						"location": 2,
-						"message": 3
-					}
-				],
-				"background": {
-					"beginsPattern": "started in",
-					"endsPattern": "."
-				}
-			}
-		},
-	]
+    {
+      "command": "pnpm i",
+      "label": "Install Web Application Dependencies",
+      "options": {
+        "cwd": "${workspaceFolder}/web-app"
+      },
+      "type": "shell"
+    },
+    {
+      "command": "pnpm astro dev --verbose",
+      "label": "Launch Web Application Development Server",
+      "options": {
+        "cwd": "${workspaceFolder}/web-app"
+      },
+      "problemMatcher": [],
+      "type": "shell"
+    },
+    {
+      "command": "rsw watch",
+      "label": "Launch Rust Watcher",
+      "options": {
+        "cwd": "${workspaceFolder}/web-app"
+      },
+      "problemMatcher": [],
+      "type": "shell"
+    },
+    {
+      "dependsOn": [
+        "Launch Web Application Development Server",
+        "Launch Rust Watcher"
+      ],
+      "label": "Build",
+      "problemMatcher": []
+    },
+    {
+      "dependsOn": "Install Web Application Dependencies",
+      "label": "Initialize",
+      "problemMatcher": []
+    }
+  ],
+  "version": "2.0.0"
 }

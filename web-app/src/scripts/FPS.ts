@@ -1,10 +1,10 @@
 export default class FPS {
-  el: HTMLDivElement;
+  div: HTMLDivElement;
   frames: Array<number>;
   now: number;
 
-  constructor(id: string) {
-    this.el = <HTMLDivElement>document.getElementById(id);
+  constructor(div: HTMLDivElement) {
+    this.div = div;
     this.frames = [];
     this.now = performance.now();
   }
@@ -31,7 +31,7 @@ export default class FPS {
       }
     );
 
-    this.el.textContent = `
+    this.div.textContent = `
 Frames per second (${this.frames.length} frame sample)
 	 latest = ${Math.round(fps)}
 	minimum = ${Math.round(min)}

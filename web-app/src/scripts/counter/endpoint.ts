@@ -22,7 +22,7 @@ const button: HTMLButtonElement = <HTMLButtonElement>(
 button.addEventListener("click", () => {
   button.disabled = true;
   button.textContent = "Counting...";
-  fetch(`/count?count=${count}`)
+  fetch(`/counter/count?count=${count}`)
     .then((response) => response.json())
     .then((body) => (span.textContent = (count = body.count).toString()))
     .finally(() => {
