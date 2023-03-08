@@ -1,4 +1,4 @@
-import { Universe } from "@rsw/gol";
+import { Universe } from "@pjm/gol";
 import FPS from "../FPS";
 import UniverseInterface from "./Universe";
 

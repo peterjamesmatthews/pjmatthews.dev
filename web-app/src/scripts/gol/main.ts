@@ -1,4 +1,4 @@
-import init from "@rsw/gol";
+import init from "@pjm/gol";
 import JSUniverse from "./JSUniverse";
 import WASMUniverse from "./WASMUniverse";
 

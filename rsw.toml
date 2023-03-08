@@ -1,4 +1,4 @@
-name = "rsw"
+name = "pjm"
 version = "0.1.0"
 
 #! time interval for file changes to trigger wasm-pack build, default `50` milliseconds
@@ -30,9 +30,10 @@ dir = "my-template"
 #! ################# NPM Package #################
 
 [[crates]]
-name = "@rsw/counter"
+name = "counter"
 link = true
 
 [[crates]]
-name = "@rsw/gol"
+name = "gol"
 link = true
+

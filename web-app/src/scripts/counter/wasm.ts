@@ -1,4 +1,4 @@
-import init, { calculateCount } from "@rsw/counter";
+import init, { calculateCount } from "@pjm/counter";
 
 /**
  * The `span` element that displays the count.

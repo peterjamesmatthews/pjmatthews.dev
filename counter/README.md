@@ -1,4 +1,4 @@
-# @rsw/counter
+# counter
 
 ## Usage
 

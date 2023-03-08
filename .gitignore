@@ -11,3 +11,7 @@ target
 
 # caches
 .rsw
+
+# rsw stuff
+/package.json
+/pnpm-lock.yaml
