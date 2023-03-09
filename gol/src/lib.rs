@@ -83,3 +83,31 @@ impl Universe {
         self.cells.as_ptr()
     }
 }
+
+#[cfg(test)]
+mod test {
+    use crate::Cell::{Alive, Dead};
+    use crate::Universe;
+
+    #[test]
+    fn ticks() {
+        let mut universe = Universe::new(3, 3);
+        /*
+           1	0	0
+
+           1	1	0
+
+           0	0	0
+        */
+        universe.cells = vec![Alive, Alive, Dead, Dead, Alive, Dead, Dead, Dead, Dead];
+        universe.tick();
+        /*
+           1	1	1
+
+           1	1	1
+
+           1	1	1
+        */
+        assert_eq!(universe.cells, vec![Alive; 9]);
+    }
+}
