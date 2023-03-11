@@ -27,8 +27,8 @@ jobs:
         with:
           node-version: 16
       - name: Install Dependencies
-        run: \
-          npm install -g pnpm \
+        run: |
+          npm install -g pnpm 
           pnpm install
       - name: Run Cypress
         # Uses the official Cypress GitHub action https://github.com/cypress-io/github-action
