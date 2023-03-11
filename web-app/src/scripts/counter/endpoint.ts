@@ -30,3 +30,5 @@ button.addEventListener("click", () => {
       button.textContent = "Count";
     });
 });
+
+export {};
