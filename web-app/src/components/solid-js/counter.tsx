@@ -5,8 +5,12 @@ export default function Counter() {
 
   return (
     <div>
-      <p>Count: {count()}</p>
-      <button onClick={() => setCount(count() + 1)}>Count</button>
+      <p>
+        Count: <span id="count">{count()}</span>
+      </p>
+      <button id="counter" onClick={() => setCount(count() + 1)}>
+        Count
+      </button>
     </div>
   );
 }
