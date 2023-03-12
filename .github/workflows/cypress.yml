@@ -6,30 +6,37 @@ on:
   pull_request:
     branches: ["main"]
 
+env:
+  CARGO_TERM_COLOR: always
+
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
     # Runs tests in parallel with matrix strategy https://docs.cypress.io/guides/guides/parallelization
     # https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
     # Also see warning here https://github.com/cypress-io/github-action#parallel
-    strategy:
-      fail-fast: false # https://github.com/cypress-io/github-action/issues/48
-      matrix:
-        containers: [1, 2] # Uses 2 parallel instances
-    defaults:
-      run:
-        working-directory: web-app
+    # strategy:
+    #   fail-fast: false # https://github.com/cypress-io/github-action/issues/48
+    #   matrix:
+    #     containers: [1, 1] # Uses 2 parallel instances
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
       - name: Install Node
         uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: Install Dependencies
-        run: |
-          npm install -g pnpm 
-          pnpm install
+      - name: Install pnpm
+        run: npm install -g pnpm
+      - name: Install wasm-pack
+        run: cargo install wasm-pack
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install rsw
+        run: cargo install rsw
+      - name: Build WASM Packages
+        run: rsw build
+      - name: Install Web Dependencies
+        working-directory: web-app
+        run: pnpm install
       - name: Run Cypress
         # Uses the official Cypress GitHub action https://github.com/cypress-io/github-action
         uses: cypress-io/github-action@v4

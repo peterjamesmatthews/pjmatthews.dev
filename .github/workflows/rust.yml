@@ -2,9 +2,9 @@ name: Rust
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 env:
   CARGO_TERM_COLOR: always
@@ -14,22 +14,22 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./counter/
+        working-directory: counter
     steps:
-    - uses: actions/checkout@v3
-    - name: Build counter
-      run: cargo build --verbose
-    - name: Test counter
-      run: cargo test --verbose
+      - uses: actions/checkout@v3
+      - name: Build counter
+        run: cargo build --verbose
+      - name: Test counter
+        run: cargo test --verbose
 
   test-gol:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./gol/
+        working-directory: gol
     steps:
-    - uses: actions/checkout@v3
-    - name: Build gol
-      run: cargo build --verbose
-    - name: Test gol
-      run: cargo test --verbose
+      - uses: actions/checkout@v3
+      - name: Build gol
+        run: cargo build --verbose
+      - name: Test gol
+        run: cargo test --verbose
