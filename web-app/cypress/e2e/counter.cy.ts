@@ -14,9 +14,11 @@ describe("test counter", () => {
 		cy.visit("/counter/wasm/");
 		cy.get("span[id='count']").should("have.text", "0");
 		cy.get("button").click();
+		cy.get("span[id='count']").should("have.text", "1");
 		cy.get("button").click();
 		cy.get("span[id='count']").should("have.text", "2");
 		cy.get("button").click();
+		cy.get("span[id='count']").should("have.text", "3");
 		cy.get("button").click();
 		cy.get("span[id='count']").should("have.text", "4");
 	});

@@ -1,99 +1,99 @@
 {
-  "tasks": [
-    {
-      "command": "pnpm i",
-      "detail": "Installs dependencies for web-app/",
-      "label": "Install Web Application Dependencies",
-      "options": {
-        "cwd": "${workspaceFolder}/web-app"
-      },
-      "type": "shell"
-    },
-    {
-      "command": "pnpm astro dev --verbose",
-      "detail": "Launches Astro.js development server for web-app/",
-      "label": "Start Web Application Server",
-      "options": {
-        "cwd": "${workspaceFolder}/web-app"
-      },
-      "problemMatcher": [],
-      "type": "shell"
-    },
-    {
-      "command": "rsw watch",
-      "detail": "Rebuilds gol/ and counter/ when changes are made",
-      "label": "Start Rust Watcher",
-      "options": {
-        "cwd": "${workspaceFolder}/"
-      },
-      "problemMatcher": [],
-      "type": "shell"
-    },
-    {
-      "dependsOn": ["Start Web Application Server", "Start Rust Watcher"],
-      "dependsOrder": "parallel",
-      "detail": "Starts any development process for pjmatthews.dev",
-      "label": "Start",
-      "problemMatcher": []
-    },
-    {
-      "dependsOn": "Install Web Application Dependencies",
-      "detail": "Installs all dependencies for pjmatthews.dev",
-      "label": "Install",
-      "problemMatcher": []
-    },
-    {
-      "dependsOn": [
-        "Clean root",
-        "Clean counter",
-        "Clean gol",
-        "Clean Web Application"
-      ],
-      "dependsOrder": "parallel",
-      "detail": "Removes any artifact for pjmatthews.dev",
-      "label": "Clean",
-      "problemMatcher": []
-    },
-    {
-      "command": "rm -rf dist/ node_modules/",
-      "detail": "Removes dependencies and build artifacts from web-app/",
-      "label": "Clean Web Application",
-      "options": {
-        "cwd": "${workspaceFolder}/web-app/"
-      },
-      "problemMatcher": [],
-      "type": "shell"
-    },
-    {
-      "command": "rm -rf pkg/ target/",
-      "detail": "Removes build artifacts from counter/",
-      "label": "Clean counter",
-      "options": {
-        "cwd": "${workspaceFolder}/counter/"
-      },
-      "problemMatcher": [],
-      "type": "shell"
-    },
-    {
-      "command": "rm -rf pkg/ target/",
-      "detail": "Removes build artifacts from gol/",
-      "label": "Clean gol",
-      "options": {
-        "cwd": "${workspaceFolder}/gol/"
-      },
-      "problemMatcher": [],
-      "type": "shell"
-    },
-    {
-      "command": "rm -rf .rsw/ node_modules/ package.json pnpm-lock.yaml",
-      "detail": "Removes build artifacts from root directory",
-      "label": "Clean root",
-      "options": {
-        "cwd": "${workspaceFolder}/"
-      },
-      "problemMatcher": [],
-      "type": "shell"
-    }
-  ],
-  "version": "2.0.0"
+	"tasks": [
+		{
+			"command": "pnpm i",
+			"detail": "Installs dependencies for web-app/",
+			"label": "Install Web Application Dependencies",
+			"options": {
+				"cwd": "${workspaceFolder}/web-app"
+			},
+			"type": "shell"
+		},
+		{
+			"command": "pnpm dev",
+			"detail": "Launches development server for web-app/",
+			"label": "Start Web Application Server",
+			"options": {
+				"cwd": "${workspaceFolder}/web-app"
+			},
+			"problemMatcher": [],
+			"type": "shell"
+		},
+		{
+			"command": "rsw watch",
+			"detail": "Rebuilds gol/ and counter/ when changes are made",
+			"label": "Start Rust Watcher",
+			"options": {
+				"cwd": "${workspaceFolder}/"
+			},
+			"problemMatcher": [],
+			"type": "shell"
+		},
+		{
+			"dependsOn": ["Start Web Application Server", "Start Rust Watcher"],
+			"dependsOrder": "parallel",
+			"detail": "Starts any development process for pjmatthews.dev",
+			"label": "Start",
+			"problemMatcher": []
+		},
+		{
+			"dependsOn": "Install Web Application Dependencies",
+			"detail": "Installs all dependencies for pjmatthews.dev",
+			"label": "Install",
+			"problemMatcher": []
+		},
+		{
+			"dependsOn": [
+				"Clean root",
+				"Clean counter",
+				"Clean gol",
+				"Clean Web Application"
+			],
+			"dependsOrder": "parallel",
+			"detail": "Removes any artifact for pjmatthews.dev",
+			"label": "Clean",
+			"problemMatcher": []
+		},
+		{
+			"command": "rm -rf dist/ node_modules/",
+			"detail": "Removes dependencies and build artifacts from web-app/",
+			"label": "Clean Web Application",
+			"options": {
+				"cwd": "${workspaceFolder}/web-app/"
+			},
+			"problemMatcher": [],
+			"type": "shell"
+		},
+		{
+			"command": "rm -rf pkg/ target/",
+			"detail": "Removes build artifacts from counter/",
+			"label": "Clean counter",
+			"options": {
+				"cwd": "${workspaceFolder}/counter/"
+			},
+			"problemMatcher": [],
+			"type": "shell"
+		},
+		{
+			"command": "rm -rf pkg/ target/",
+			"detail": "Removes build artifacts from gol/",
+			"label": "Clean gol",
+			"options": {
+				"cwd": "${workspaceFolder}/gol/"
+			},
+			"problemMatcher": [],
+			"type": "shell"
+		},
+		{
+			"command": "rm -rf .rsw/ node_modules/ package.json pnpm-lock.yaml",
+			"detail": "Removes build artifacts from root directory",
+			"label": "Clean root",
+			"options": {
+				"cwd": "${workspaceFolder}/"
+			},
+			"problemMatcher": [],
+			"type": "shell"
+		}
+	],
+	"version": "2.0.0"
 }
