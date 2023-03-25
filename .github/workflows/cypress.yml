@@ -28,10 +28,10 @@ jobs:
         run: npm install -g pnpm
       - name: Install wasm-pack
         run: cargo install wasm-pack
-      - name: Checkout code
-        uses: actions/checkout@v3
       - name: Install rsw
         run: cargo install rsw
+      - name: Checkout code
+        uses: actions/checkout@v3
       - name: Build WASM Packages
         run: rsw build
       - name: Install Web Dependencies

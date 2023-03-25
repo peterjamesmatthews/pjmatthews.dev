@@ -1,14 +1,20 @@
 {
-  "extends": "astro/tsconfigs/base",
-  "compilerOptions": {
-    "allowJs": true,
-    "baseUrl": "./",
-    "paths": {
-      "@components/*": ["src/components/*"],
-      "@scripts/*": ["src/scripts/*"]
-    },
-    "isolatedModules": false,
-    "jsx": "preserve",
-    "jsxImportSource": "solid-js"
-  }
+	"compilerOptions": {
+		"esModuleInterop": true,
+		"isolatedModules": false,
+		"jsx": "preserve",
+		"jsxImportSource": "solid-js",
+		"lib": ["ESNext", "DOM"],
+		"module": "ESNext",
+		"moduleResolution": "Node",
+		"noEmit": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"resolveJsonModule": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"target": "ESNext",
+		"useDefineForClassFields": true
+	},
+	"include": ["."]
 }

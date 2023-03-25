@@ -1,6 +1,7 @@
 import { createSignal } from "solid-js";
+import { render } from "solid-js/web";
 
-export default function Counter() {
+function Counter() {
   const [count, setCount] = createSignal(0);
 
   return (
@@ -14,3 +15,6 @@ export default function Counter() {
     </div>
   );
 }
+
+const app = document.getElementById("app");
+if (app !== null) render(() => <Counter />, app);
