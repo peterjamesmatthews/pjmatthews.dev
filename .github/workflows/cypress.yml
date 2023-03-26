@@ -32,11 +32,14 @@ jobs:
         run: cargo install rsw
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Build WASM Packages
+      - name: Build WASM Modules
         run: rsw build
-      - name: Install Web Dependencies
-        working-directory: web-app
+      - name: Install Dependencies
         run: pnpm install
+      - name: Start Web Server
+        working-directory: web-server
+        run: pnpm dev
+        background: true
       - name: Run Cypress
         # Uses the official Cypress GitHub action https://github.com/cypress-io/github-action
         uses: cypress-io/github-action@v4
@@ -49,7 +52,7 @@ jobs:
           # Records to Cypress Cloud
           # https://docs.cypress.io/guides/cloud/projects#Set-up-a-project-to-record
           record: true
-          parallel: true # Runs test in parallel using settings above
+          # parallel: true # Runs test in parallel using settings above
         env:
           # For recording and parallelization to work you must set your CYPRESS_RECORD_KEY
           # in GitHub repo → Settings → Secrets → Actions

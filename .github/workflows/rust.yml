@@ -21,7 +21,6 @@ jobs:
         run: cargo build --verbose
       - name: Test counter
         run: cargo test --verbose
-
   test-gol:
     runs-on: ubuntu-latest
     defaults:
