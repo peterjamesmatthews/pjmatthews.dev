@@ -1,5 +1,5 @@
-name = "pjm"
-version = "0.1.0"
+name = "pjmatthews.dev"
+version = "0.0.1"
 
 #! time interval for file changes to trigger wasm-pack build, default `50` milliseconds
 interval = 50

@@ -2,94 +2,69 @@
 	"tasks": [
 		{
 			"command": "pnpm i",
-			"detail": "Installs dependencies for web-app/",
-			"label": "Install Web Application Dependencies",
-			"options": {
-				"cwd": "${workspaceFolder}/web-app"
-			},
-			"type": "shell"
-		},
-		{
-			"command": "pnpm dev",
-			"detail": "Launches development server for web-app/",
-			"label": "Start Web Application Server",
-			"options": {
-				"cwd": "${workspaceFolder}/web-app"
-			},
-			"problemMatcher": [],
-			"type": "shell"
-		},
-		{
-			"command": "rsw watch",
-			"detail": "Rebuilds gol/ and counter/ when changes are made",
-			"label": "Start Rust Watcher",
-			"options": {
-				"cwd": "${workspaceFolder}/"
-			},
-			"problemMatcher": [],
-			"type": "shell"
-		},
-		{
-			"dependsOn": ["Start Web Application Server", "Start Rust Watcher"],
-			"dependsOrder": "parallel",
-			"detail": "Starts any development process for pjmatthews.dev",
-			"label": "Start",
-			"problemMatcher": []
-		},
-		{
-			"dependsOn": "Install Web Application Dependencies",
-			"detail": "Installs all dependencies for pjmatthews.dev",
+			"dependsOn": ["Build RSW"],
+			"detail": "Installs all dependencies",
 			"label": "Install",
-			"problemMatcher": []
+			"problemMatcher": [],
+			"type": "shell"
 		},
 		{
+			"command": "rsw build",
+			"detail": "Builds RSW crates",
+			"label": "Build RSW",
+			"problemMatcher": [],
+			"type": "shell"
+		},
+		{
+			"command": "rm -rf .rsw node_modules",
 			"dependsOn": [
-				"Clean root",
 				"Clean counter",
 				"Clean gol",
-				"Clean Web Application"
+				"Clean web-app",
+				"Clean web-server"
 			],
 			"dependsOrder": "parallel",
-			"detail": "Removes any artifact for pjmatthews.dev",
+			"detail": "Cleans all artifacts in the workspace",
 			"label": "Clean",
-			"problemMatcher": []
-		},
-		{
-			"command": "rm -rf dist/ node_modules/",
-			"detail": "Removes dependencies and build artifacts from web-app/",
-			"label": "Clean Web Application",
-			"options": {
-				"cwd": "${workspaceFolder}/web-app/"
-			},
 			"problemMatcher": [],
 			"type": "shell"
 		},
 		{
-			"command": "rm -rf pkg/ target/",
-			"detail": "Removes build artifacts from counter/",
+			"command": "rm -rf pkg target",
+			"detail": "Cleans artifacts from the counter crate",
 			"label": "Clean counter",
 			"options": {
-				"cwd": "${workspaceFolder}/counter/"
+				"cwd": "${workspaceFolder}/counter"
 			},
 			"problemMatcher": [],
 			"type": "shell"
 		},
 		{
-			"command": "rm -rf pkg/ target/",
-			"detail": "Removes build artifacts from gol/",
+			"command": "rm -rf pkg target",
+			"detail": "Cleans artifacts from the gol crate",
 			"label": "Clean gol",
 			"options": {
-				"cwd": "${workspaceFolder}/gol/"
+				"cwd": "${workspaceFolder}/gol"
 			},
 			"problemMatcher": [],
 			"type": "shell"
 		},
 		{
-			"command": "rm -rf .rsw/ node_modules/ package.json pnpm-lock.yaml",
-			"detail": "Removes build artifacts from root directory",
-			"label": "Clean root",
+			"command": "rm -rf node_modules",
+			"detail": "Cleans artifacts from the web application",
+			"label": "Clean web-app",
 			"options": {
-				"cwd": "${workspaceFolder}/"
+				"cwd": "${workspaceFolder}/web-app"
+			},
+			"problemMatcher": [],
+			"type": "shell"
+		},
+		{
+			"command": "rm -rf node_modules",
+			"detail": "Cleans artifacts from the web server",
+			"label": "Clean web-server",
+			"options": {
+				"cwd": "${workspaceFolder}/web-server"
 			},
 			"problemMatcher": [],
 			"type": "shell"

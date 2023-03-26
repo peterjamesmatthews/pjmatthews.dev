@@ -2,6 +2,9 @@
 	"dependencies": {
 		"@pjm/counter": "link:/Users/pjm/Repositories/pjmatthews.dev/counter/pkg",
 		"@pjm/gol": "link:/Users/pjm/Repositories/pjmatthews.dev/gol/pkg",
+		"@pjm/web-server": "workspace:^0.0.1",
+		"@trpc/client": "^10.18.0",
+		"@trpc/server": "^10.18.0",
 		"solid-js": "^1.6.14"
 	},
 	"devDependencies": {
@@ -11,7 +14,7 @@
 		"vite": "^4.1.0",
 		"vite-plugin-solid": "^2.6.1"
 	},
-	"name": "web-app",
+	"name": "@pjm/web-app",
 	"private": true,
 	"scripts": {
 		"build": "tsc && vite build",
@@ -19,5 +22,5 @@
 		"preview": "vite preview"
 	},
 	"type": "module",
-	"version": "0.0.0"
+	"version": "0.0.1"
 }

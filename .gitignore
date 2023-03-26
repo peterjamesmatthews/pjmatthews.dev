@@ -1,17 +1,13 @@
-# dependencies
-node_modules
+# npm dependencies
+node_modules 
 
-# misc
+# macOS files
 .DS_Store
 
-# build artifacts
-dist
+# build output
+dist  
 pkg
 target
 
-# caches
+# build cache
 .rsw
-
-# rsw stuff
-/package.json
-/pnpm-lock.yaml

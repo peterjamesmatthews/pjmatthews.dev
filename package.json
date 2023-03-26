@@ -1,0 +1,11 @@
+{
+	"name": "@pjm/root",
+	"version": "0.0.1",
+	"scripts": {},
+	"license": "ISC",
+	"dependencies": {
+		"counter": "link:/Users/pjm/Repositories/pjmatthews.dev/counter/pkg",
+		"gol": "link:/Users/pjm/Repositories/pjmatthews.dev/gol/pkg"
+	},
+	"devDependencies": {}
+}
