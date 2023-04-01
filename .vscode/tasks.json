@@ -68,6 +68,41 @@
 			},
 			"problemMatcher": [],
 			"type": "shell"
+		},
+		{
+			"label": "Start web application",
+			"detail": "Starts the web application in development mode",
+			"type": "shell",
+			"command": "pnpm run dev",
+			"options": {
+				"cwd": "${workspaceFolder}/web-app"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Start web server",
+			"detail": "Starts the web server in development mode",
+			"type": "shell",
+			"command": "pnpm run dev",
+			"options": {
+				"cwd": "${workspaceFolder}/web-server"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Start rsw",
+			"detail": "Starts RSW to watch for changes and rebuild crates",
+			"type": "shell",
+			"command": "rsw watch",
+			"problemMatcher": []
+		},
+		{
+			"label": "Start",
+			"detail": "Starts all development servers",
+			"dependsOn": ["Start rsw", "Start web application", "Start web server"],
+			"dependsOrder": "parallel",
+			"type": "shell",
+			"problemMatcher": []
 		}
 	],
 	"version": "2.0.0"
