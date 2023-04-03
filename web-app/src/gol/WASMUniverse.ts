@@ -16,6 +16,7 @@ export default class WASMUniverse implements UniverseInterface {
 	private canvas: HTMLCanvasElement;
 	private cells: Uint8Array;
 	private context: CanvasRenderingContext2D;
+	private diffs: Uint32Array; // ? in WASM `diffs` is a Vec<usize>, is `Uint32Array` the right choice here?
 	private height: number;
 	private width: number;
 	private universe: Universe;
@@ -28,7 +29,6 @@ export default class WASMUniverse implements UniverseInterface {
 	 * @param height The number of cells high this universe will contain (1 cell = 5px square).
 	 * @param width The number of cells wide this universe will contain (1 cell = 5px square).
 	 * @param memory The memory buffer returned from the WebAssembly module's initialization.
-	 * @param fpsDiv _(optional)_ The HTML `div` element for this universe to render its frame-per-second to.
 	 */
 	constructor(
 		canvas: HTMLCanvasElement,
@@ -38,11 +38,12 @@ export default class WASMUniverse implements UniverseInterface {
 		fpsDiv?: HTMLDivElement
 	) {
 		this.canvas = canvas;
+		canvas.style.backgroundColor = GRID_COLOR;
 		this.canvas.height = (CELL_SIZE + 1) * height + 1;
 		this.canvas.width = (CELL_SIZE + 1) * width + 1;
 		this.height = height;
 		this.width = width;
-		this.context = <CanvasRenderingContext2D>canvas.getContext("2d");
+		this.context = canvas.getContext("2d") as CanvasRenderingContext2D;
 		this.fps = fpsDiv === undefined ? null : new FPS(fpsDiv);
 		this.universe = Universe.new(height, width);
 		this.memory = memory;
@@ -51,12 +52,22 @@ export default class WASMUniverse implements UniverseInterface {
 			this.universe.getCells(),
 			height * width
 		);
-		this.drawGrid();
+		this.diffs = new Uint32Array(
+			this.memory.buffer,
+			this.universe.getDiffs(),
+			height * width
+		);
 		this.drawCells();
 	}
 
-	private getIndex(row: number, col: number): number {
-		return row * this.width + col;
+	private coordsToIndex(row: number, col: number): number {
+		return col * this.width + row;
+	}
+
+	// ? is this true for non-square universes?
+	private indexToCoords(index: number): [number, number] {
+		const row = index % this.width;
+		return [row, (index - row) / this.width];
 	}
 
 	private drawGrid() {
@@ -80,11 +91,10 @@ export default class WASMUniverse implements UniverseInterface {
 	}
 
 	private drawCells() {
-		this.context.beginPath();
 		for (let row = 0; row < this.height; row++) {
 			for (let col = 0; col < this.width; col++) {
 				this.context.fillStyle =
-					this.cells[this.getIndex(row, col)] === CELL.ALIVE
+					this.cells[this.coordsToIndex(row, col)] === CELL.ALIVE
 						? ALIVE_COLOR
 						: DEAD_COLOR;
 				this.context.fillRect(
@@ -95,14 +105,28 @@ export default class WASMUniverse implements UniverseInterface {
 				);
 			}
 		}
-		this.context.stroke();
+	}
+
+	private drawDiffs(diffs: number) {
+		for (let i = 0; i < diffs; i++) {
+			const iCell = this.diffs[i];
+			this.context.fillStyle =
+				this.cells[iCell] === CELL.ALIVE ? ALIVE_COLOR : DEAD_COLOR;
+
+			// convert the cell index to its row and coordinates
+			const [row, col] = this.indexToCoords(iCell);
+			this.context.fillRect(
+				col * (CELL_SIZE + 1) + 1,
+				row * (CELL_SIZE + 1) + 1,
+				CELL_SIZE,
+				CELL_SIZE
+			);
+		}
 	}
 
 	public play() {
 		if (this.fps !== null) this.fps.render();
-		this.universe.tick();
-		this.drawGrid();
-		this.drawCells();
+		this.drawDiffs(this.universe.tick());
 		this.requestId = requestAnimationFrame(() => this.play());
 	}
 
