@@ -18,17 +18,30 @@ init().then(async ({ memory }) => {
 		<HTMLDivElement>document.getElementById("fps-wasm")
 	);
 
-	const button = <HTMLButtonElement>document.getElementById("play-pause");
+	const jsButton = <HTMLButtonElement>document.getElementById("play-pause-js");
 
-	button.addEventListener("click", () => {
-		if (button.textContent === "Play") {
+	jsButton.addEventListener("click", () => {
+		if (jsButton.textContent === "Play") {
 			js.play();
+			jsButton.textContent = "Pause";
+		} else {
+			js.pause();
+			jsButton.textContent = "Play";
+		}
+	});
+
+	const wasmButton = <HTMLButtonElement>(
+		document.getElementById("play-pause-wasm")
+	);
+
+	wasmButton.addEventListener("click", () => {
+		if (wasmButton.textContent === "Play") {
 			wasm.play();
-			button.textContent = "Pause";
+			wasmButton.textContent = "Pause";
 		} else {
 			js.pause();
 			wasm.pause();
-			button.textContent = "Play";
+			wasmButton.textContent = "Play";
 		}
 	});
 });

@@ -3,13 +3,10 @@
 	<head>
 		<style>
 			body {
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
 				display: flex;
-				flex-direction: column;
+				margin: 0;
+				flex-direction: row;
+				flex-wrap: wrap;
 				align-items: center;
 				justify-content: center;
 			}
@@ -17,27 +14,54 @@
 		<script defer type="module" src="./main.ts"></script>
 	</head>
 	<body>
-		<button id="play-pause">Play</button>
 		<div
 			style="
 				display: flex;
-				flex-direction: row;
-				width: 100%;
+				flex-direction: column;
 				justify-content: center;
+				align-items: center;
+				padding: 0 1rem;
 			"
 		>
-			<div style="display: flex; flex-direction: column; margin: 10px">
-				<div id="fps-js" style="white-space: pre; font-family: monospace">
-					FPS-JS
-				</div>
-				<canvas id="gol-js"></canvas>
-			</div>
-			<div style="display: flex; flex-direction: column; margin: 10px">
-				<div id="fps-wasm" style="white-space: pre; font-family: monospace">
-					FPS-WASM
-				</div>
-				<canvas id="gol-wasm"></canvas>
-			</div>
+			<h2 style="user-select: none">JavaScript</h2>
+			<button id="play-pause-js" style="user-select: none">Play</button>
+			<div
+				id="fps-js"
+				style="
+					white-space: pre;
+					font-family: monospace;
+					margin: 1rem 0;
+					user-select: none;
+				"
+			></div>
+			<canvas id="gol-js"></canvas>
+		</div>
+		<div
+			style="
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				padding: 0 1rem;
+			"
+		>
+			<h2 style="user-select: none">WebAssembly</h2>
+			<button id="play-pause-wasm" style="user-select: none">Play</button>
+			<div
+				id="fps-wasm"
+				style="
+					white-space: pre;
+					font-family: monospace;
+					margin: 1rem 0;
+					user-select: none;
+				"
+			></div>
+			<canvas id="gol-wasm"></canvas>
+		</div>
+		<div style="flex-basis: 100%"></div>
+		<div style="margin: 3rem 0; font-family: monospace">
+			open -a "Google Chrome" --args --disable-gpu-vsync
+			--disable-frame-rate-limit
 		</div>
 	</body>
 </html>

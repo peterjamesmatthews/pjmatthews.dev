@@ -31,8 +31,8 @@ impl Universe {
     /// Given a row and column, return the number of live neighbors.
     fn count_live_neighbors(&self, row: u32, col: u32) -> u8 {
         let mut count: u8 = 0;
-        for delta_row in [self.height - 1, 0, 1].iter().cloned() {
-            for delta_col in [self.width - 1, 0, 1].iter().cloned() {
+        for delta_row in [self.height - 1, 0, 1] {
+            for delta_col in [self.width - 1, 0, 1] {
                 if delta_row == 0 && delta_col == 0 {
                     continue;
                 }
@@ -51,7 +51,7 @@ impl Universe {
 impl Universe {
     /// Given a height and width, return a new universe.
     pub fn new(height: u32, width: u32) -> Universe {
-        let size = usize::try_from(height * width).unwrap(); // TODO this should unwrap or else throw a JS error taht the universe size is too big
+        let size = usize::try_from(height * width).unwrap(); // TODO this should unwrap or else throw a JS error that the universe size is too big
         let cells = (0..size)
             .map(|i| {
                 if i % 2 == 0 || i % 7 == 0 {
@@ -82,26 +82,10 @@ impl Universe {
                 let live_neighbors = self.count_live_neighbors(row, col);
 
                 let diff = match (cell, live_neighbors) {
-                    (Cell::Alive, 0) | (Cell::Alive, 1) => {
-                        // log!("Cells[{}, {}] will die of underpopulation.", row, col);
-                        true
-                    } // underpopulation
-                    (Cell::Alive, 2) | (Cell::Alive, 3) => {
-                        // log!("Cells[{}, {}] will survive.", row, col);
-                        false
-                    } // survives
-                    (Cell::Alive, _) => {
-                        // log!("Cells[{}, {}] will die of overpopulation.", row, col);
-                        true
-                    } // overpopulation
-                    (Cell::Dead, 3) => {
-                        // log!("Cells[{}, {}] will be born.", row, col);
-                        true
-                    } // reproduction
-                    (Cell::Dead, _) => {
-                        // log!("Cells[{}, {}] will be stay dead.", row, col);
-                        false
-                    }
+                    (Cell::Alive, 2 | 3) => false, // survives
+                    (Cell::Alive, _) => true,      // dies from underpopulation or overpopulation
+                    (Cell::Dead, 3) => true,       // born from reproduction
+                    (Cell::Dead, _) => false,
                 };
 
                 if diff {

@@ -70,26 +70,6 @@ export default class WASMUniverse implements UniverseInterface {
 		return [row, (index - row) / this.width];
 	}
 
-	private drawGrid() {
-		this.context.beginPath();
-		this.context.strokeStyle = GRID_COLOR;
-		for (let col = 0; col <= this.width; col++) {
-			this.context.moveTo(col * (CELL_SIZE + 1) + 1, 0);
-			this.context.lineTo(
-				col * (CELL_SIZE + 1) + 1,
-				(CELL_SIZE + 1) * this.height + 1
-			);
-		}
-		for (let row = 0; row <= this.height; row++) {
-			this.context.moveTo(0, row * (CELL_SIZE + 1) + 1);
-			this.context.lineTo(
-				(CELL_SIZE + 1) * this.width + 1,
-				row * (CELL_SIZE + 1) + 1
-			);
-		}
-		this.context.stroke();
-	}
-
 	private drawCells() {
 		for (let row = 0; row < this.height; row++) {
 			for (let col = 0; col < this.width; col++) {

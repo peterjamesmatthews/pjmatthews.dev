@@ -14,6 +14,7 @@ const CELL = {
 export default class JSUniverse implements Universe {
 	private canvas: HTMLCanvasElement;
 	private context: CanvasRenderingContext2D;
+	private diffs: Array<[number, number]>;
 	private height: number;
 	private width: number;
 	private cells: Array<Array<number>>;
@@ -50,6 +51,7 @@ export default class JSUniverse implements Universe {
 						: CELL.DEAD;
 			}
 		}
+		this.diffs = new Array(height * width).fill(0);
 		this.fps = fpsDiv === undefined ? null : new FPS(fpsDiv);
 		this.drawCells();
 	}
@@ -86,48 +88,40 @@ export default class JSUniverse implements Universe {
 	}
 
 	private tick() {
-		const next: number[][] = [];
-		for (let row = 0; row < this.height; row++) {
-			next[row] = [];
-			for (let col = 0; col < this.width; col++)
-				next[row][col] = this.cells[row][col];
-		}
+		let diffs = 0;
 		for (let row = 0; row < this.height; row++) {
 			for (let col = 0; col < this.width; col++) {
-				switch (this.cells[row][col]) {
-					case CELL.ALIVE:
-						switch (this.countLiveNeighbors(row, col)) {
-							case 0:
-							case 1:
-								next[row][col] = CELL.DEAD;
-								break;
-							case 2:
-							case 3:
-								next[row][col] = CELL.ALIVE;
-								break;
-							default:
-								next[row][col] = CELL.DEAD;
-						}
-						break;
-					case CELL.DEAD:
-						switch (this.countLiveNeighbors(row, col)) {
-							case 3:
-								next[row][col] = CELL.ALIVE;
-								break;
-							default:
-								next[row][col] = CELL.DEAD;
-						}
-						break;
+				const neighbors = this.countLiveNeighbors(row, col);
+				if (this.cells[row][col] === CELL.ALIVE) {
+					if (!(neighbors === 2 || neighbors === 3))
+						this.diffs[diffs++] = [row, col];
+				} else {
+					// assuming this.cells[row][col] === CELL.DEAD...
+					if (neighbors === 3) this.diffs[diffs++] = [row, col];
 				}
 			}
 		}
-		this.cells = next;
+		for (let i = 0; i < diffs; i++) {
+			const [row, col] = this.diffs[i];
+			const newCell =
+				this.cells[row][col] === CELL.ALIVE ? CELL.DEAD : CELL.ALIVE;
+
+			this.cells[row][col] = newCell;
+			// update canvas
+			this.context.fillStyle =
+				newCell === CELL.ALIVE ? ALIVE_COLOR : DEAD_COLOR;
+			this.context.fillRect(
+				col * (CELL_SIZE + 1) + 1,
+				row * (CELL_SIZE + 1) + 1,
+				CELL_SIZE,
+				CELL_SIZE
+			);
+		}
 	}
 
 	public play() {
 		if (this.fps !== null) this.fps.render();
 		this.tick();
-		this.drawCells();
 		this.requestId = requestAnimationFrame(() => this.play());
 	}
 
