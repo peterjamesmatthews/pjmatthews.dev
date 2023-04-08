@@ -16,8 +16,10 @@ const router = tRPC.router({
 	 */
 	count: tRPC.procedure
 		.input(z.object({ count: z.number().finite() }))
-		.query((request) => {
+		.query(async (request) => {
 			const { count } = request.input;
+			// wait 1.5 seconds before returning to simulate a long-running task
+			await new Promise((resolve) => setTimeout(resolve, 1.5e3));
 			return count + 1;
 		}),
 });
