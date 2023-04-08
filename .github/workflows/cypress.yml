@@ -38,8 +38,7 @@ jobs:
         run: pnpm install
       - name: Start Web Server
         working-directory: web-server
-        run: pnpm dev
-        background: true
+        run: pnpm dev &
       - name: Run Cypress
         # Uses the official Cypress GitHub action https://github.com/cypress-io/github-action
         uses: cypress-io/github-action@v4
