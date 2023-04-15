@@ -21,37 +21,28 @@ jobs:
         with:
           path: ~/.cargo
           key: ${{ runner.os }}-${{ env.cache-name }}
-
       - name: Install Rust WASM Tools
         run: |
           cargo install wasm-pack
           cargo install rsw
-
       - name: Install Node
         uses: actions/setup-node@v3
         with:
           node-version: 16
-
       - name: Install pnpm
         uses: pnpm/action-setup@v2.2.4
         with:
           version: 8
           run_install: false
-
       - name: Checkout Repository
         uses: actions/checkout@v3
-
       - name: Build WASM Packages
         run: rsw build
-
-      - name: Get pnpm store directory
+      - name: Print pnpm Store Path
         id: pnpm-cache
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-      - uses: actions/cache@v3
-        name: Setup pnpm cache
+        run: echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+      - name: Cache Node Dependencies
+        uses: actions/cache@v3
         with:
           path: |
             ${{ steps.pnpm-cache.outputs.STORE_PATH }}
@@ -59,14 +50,11 @@ jobs:
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
-
-      - name: Install dependencies
+      - name: Install Node Dependencies
         run: pnpm install --frozen-lockfile
-
       - name: Start Web Server
         working-directory: web-server
         run: pnpm dev &
-
       - name: Run Cypress
         uses: cypress-io/github-action@v4
         with:
